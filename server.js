@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://radhe19patel:radhe19patel@cluster0.q9ewi.mongodb.net/FoodMania", {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -39,6 +39,10 @@ const bookingSchema = new mongoose.Schema({
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);
+
+app.get("/", async (req, res) => {
+    res.status(201).send("Welcome !!!")
+})
 
 // Add item to the cart (POST request)
 app.post('/api/cart', async (req, res) => {
